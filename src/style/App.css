@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/*------------------------------------------------------*/
+#root {
+ background-color: #a5a6a4;
+}
+.coin-list {
+    display: flex;
+    padding: 5px;
+}
+.coin-list__block-list {
+    background-color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 600px;
+    height: 600px;
+    border-radius: 10px;
+    overflow: auto;
+    position: relative;
+}
+.coin-list__block-list::-webkit-scrollbar {
+    width: 10px;
+}
+.coin-list__block-list::-webkit-scrollbar-track {
+}
+.coin-list__block-list::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 2px solid;
+}
+.coin-list__candlestick-chart {
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+.coin_list__description {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid #a5a6a4;
+}
+.coin-list__header {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coin-list__text {
+    font-weight: 900;
+}
+
+.coin-list__contracts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    margin-bottom: 20px;
+}
+.coin-list__btn {
+    height: 30px;
+    font-weight: 600;
+}
+.coin-list__btn {
+    width: 100%;
+    cursor: pointer;
+}
+.coin-list__btn_active {
+    background: teal;
+}
+.coin-list__nomination {
+    display: grid;
+    grid-template-columns: [start] 150px repeat(3, 1fr);
+    gap: 5px;
+    padding-bottom: 5px;
+}
+.coin-list__designation:not(:first-child) {
+    text-align: right;
+    border-left: 1px solid #a5a6a4;
+}
+.coin-list__designation {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.coin-list__pair {
+    display: grid;
+    grid-template-columns: [start] 150px repeat(3, 1fr);
+    gap: 5px;
+    align-content: center;
+    height: 45px;
+    border-bottom: 1px solid #a5a6a4;
+}
+.coin-list__pair_active {
+    background: teal;
+}
+.coin-list__description:not(:first-child) {
+    text-align: right;
+}
+.coin-list__designation:first-child {
+    cursor: auto;
+}
+.coin-list__description_price_min {
+    color: #952806;
+}
+.coin-list__description_price_max {
+    color: cadetblue;
+}
+.coin-list__searchOfPair {
+    margin-bottom: 25px;
+}
+.coin-list__search-input {
+    width: 100%;
+}
