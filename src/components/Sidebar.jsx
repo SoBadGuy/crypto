@@ -1,21 +1,18 @@
 import React, {useMemo, useState} from 'react';
 import PairList from "./PairList";
 import SortButton from "./SortButton";
+import {createChart} from "lightweight-charts";
+import CandlestickHart from "./chart/CandlestickСhart";
 
-const Sidebar = ({pairList, onChange, value}) => {
-
+const Sidebar = ({pairList, onChange, value, activePair, updateActivePair, updateCandle,updateTimeInterval, timeInterval}) => {
     const [selectionOfQuotes, setSelectionOfQuotes] = useState({activeBtn: "futures"})
     const [searchInput, setSearchInput] =useState('')
-
-
     const searchOfName = useMemo(() => {
-        console.log("ВЫзов отрисовки сортировки")
         if (searchInput) {
             return [...pairList].filter((elem) => elem.symbol.toLowerCase().includes(searchInput.toLowerCase()))
         }
         return pairList
     }, [searchInput, pairList])
-
     return (
         <section className="coin-list">
             <div className="coin-list__block-list">
@@ -34,6 +31,7 @@ const Sidebar = ({pairList, onChange, value}) => {
                             Фьючерс
                         </button>
                         <button
+                            disabled
                             onClick={() => setSelectionOfQuotes({activeBtn: "spot"})}
                             className={selectionOfQuotes.activeBtn === "spot"
                                 ? "coin-list__btn coin-list__btn_active"
@@ -62,10 +60,13 @@ const Sidebar = ({pairList, onChange, value}) => {
                         ]}
                     />
                 </div>
-                <PairList pairList={searchOfName}/>
+                <PairList
+                    updateActivePair={updateActivePair}
+                    activePair={activePair}
+                    pairList={searchOfName}/>
             </div>
             <div className="coin-list__candlestick-chart">
-                eqweweeeeeeeeeeeeeeeeeeeeee
+                <CandlestickHart time={timeInterval} updateTimeInterval={updateTimeInterval} update={updateCandle} symbol={activePair} chartProperties={{ height: 500}}/>
             </div>
         </section>
     );

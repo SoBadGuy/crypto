@@ -1,13 +1,21 @@
 import React from 'react';
 
-const PairList = ({pairList}) => {
+const PairList = ({pairList, activePair, updateActivePair}) => {
+    function priceFormat(num){
+        const indexPriceForm = String(num).indexOf(".")
+        const priceForm = indexPriceForm > 0 ? String(num).slice(indexPriceForm + 1).length : 0
+        return priceForm
+    }
 
     return (
         <div>
         {pairList.map(prev => (
                 <div
                     key={prev.symbol}
-                    className="coin-list__pair"
+                    onClick={() => updateActivePair({name: prev.symbol.toLowerCase(), postForm: {priceFormat: {type: 'price', precision: priceFormat(prev.lastPrice), minMove: 1 / Math.pow(10, priceFormat(prev.lastPrice))}}})}
+                    className={activePair.name === prev.symbol.toLowerCase()
+                        ? "coin-list__pair coin-list__pair_active"
+                        : "coin-list__pair"}
                 >
                     <span className="coin-list__description coin-list__description_symbol">{prev.symbol}</span>
                     <span className="coin-list__description coin-list__description_price">{prev.lastPrice}</span>
