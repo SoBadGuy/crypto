@@ -1,0 +1,352 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body{
+  background-color: #c0c3be
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+/************HEADER**************/
+
+.container {
+  width: 99.5vw;
+  margin: 0 auto;
+}
+.header__box {
+  background-color: white;
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  height: 70px;
+}
+.burger-menu {
+  display: none;
+}
+.header__close-burgerMenu {
+  display: none;
+}
+.navbar__box {
+ display: contents;
+}
+.navbar__list {
+  display: flex;
+  list-style: none;
+}
+.navbar__item {
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+.navbar__link {
+  text-decoration: none;
+  color: black;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.navbar__link_active {
+  color: teal;
+  text-decoration: underline;
+}
+.header__btn {
+  height: 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    background: teal;
+  }
+}
+.header__btn_reg {
+  width: 120px;
+}
+.header__btn_auth {
+  width: 80px;
+  margin-left: 5px;
+}
+/************HOME**************/
+.home {
+  position: relative;
+  flex-grow: 1;
+}
+.home__open-tradingMenu {
+  display: none;
+}
+.home__container {
+  height: 100%;
+}
+.home__box {
+  display: flex;
+  gap: 5px;
+  height: 100%;
+}
+.trading-menu {
+  width: 500px;
+  height: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: white;
+  box-sizing: border-box;
+}
+.trading-menu-mini__close {
+  display: none;
+}
+.trading-menu__title {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 900;
+}
+.trading-menu__selection-markets {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+}
+.trading-menu__btn-market {
+  width: 50%;
+  height: 25px;
+}
+.trading-menu__btn-market_active {
+  background-color: teal;
+}
+.trading-menu__search {
+  margin-top: 10px;
+}
+.search-by-name{
+  text-align: center;
+  width: 100%;
+  height: 25px;
+  &::placeholder {
+    text-align: center;
+  }
+}
+.sort-list {
+  display: flex;
+  margin-top: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  padding-bottom: 5px;
+}
+.sort-item {
+  padding: 0 5px 0 5px;
+  width: 115px;
+  text-align: right;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: #dc788e
+  }
+  &:first-child {
+    width: 24px;
+    height: 100%;
+  }
+  &:nth-child(2) {
+    text-align: left;
+  }
+}
+.sort-item_name {
+  text-align: left;
+}
+.trade-list {
+  position: relative;
+  height: 100%;
+}
+.trade-list__loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.trade-list__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(0,128,128, 0.5);
+    border-radius: 10px;
+  }
+}
+.trade-list__box {
+  position: relative;
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1;
+  &:hover {
+    background: rgb(0,128,128, 0.1);
+  }
+}
+.trade-list__box_active {
+  background: rgb(0,128,128, 0.3)
+}
+.trade-list__item {
+  width: 115px;
+  padding: 0 5px 0 5px;
+  font-size: 14px;
+  text-align: right;
+  &:first-child {
+    width: 24px;
+    &:hover {
+      color: #dc788e;
+    }
+  }
+}
+.trade-list__name {
+  text-align: left;
+}
+.trade-list__priceChangePercent {
+  color: teal;
+}
+.trade-list__priceChangePercent_min {
+  color: #e42910
+}
+#chart {
+  position: relative;
+  background-color: white;
+  flex-grow: 1;
+  border-radius: 10px;
+  height: 100%;
+  box-shadow: 0 0 0 1px black;
+}
+.chart-loading {
+  position: relative;
+  background-color: white;
+  flex-grow: 1;
+  border-radius: 10px;
+  height: 100%;
+  box-shadow: 0 0 0 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tv-lightweight-charts {
+  border-radius: 10px;
+}
+.chart__timeIntervalButtons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+}
+.chart__btnInterval {
+  margin-top: 10px;
+  margin-right: 5px;
+  width: 40px;
+}
+.chart__btnInterval_active {
+  background-color: teal;
+}
+/************FOOTER**************/
+.footer__box {
+  background-color: white;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+@media screen and (max-width: 1200px) {
+  .trading-menu {
+    display: none;
+  }
+  .trading-menu-mini {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 315px;
+    z-index: 10;
+  }
+  .trading-menu__title {
+    position: relative;
+  }
+  .home__open-tradingMenu {
+    display: block;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+    z-index: 5;
+  }
+  .trading-menu-mini__close {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .trade-list__item {
+    width: 70px;
+    font-size: 10px;
+  }
+  .sort-item {
+    font-size: 10px;
+  }
+  .navbar__box {
+    display: none;
+  }
+  .navbar__box_mini {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 310px;
+    border: 1px solid black;
+    z-index: 20;
+    border-radius: 10px;
+    background-color: white;
+  }
+  .navbar__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar__item {
+    margin-top: 10px;
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+  }
+  .header__group-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .burger-menu {
+    display: block;
+  }
+  .header__close-burgerMenu {
+    margin-top: 10px;
+    display: block;
+  }
+  .footer {
+    display: none;
+  }
+}
