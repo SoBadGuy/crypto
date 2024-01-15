@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC, ReactNode} from "react"; 
 
 interface ISortList {
     sortingElements: {name: string | ReactNode, value: string}[],
@@ -10,7 +10,7 @@ const SortList:FC<ISortList>= ({sortingElements, sortingSelection}) => {
             {sortingElements.map(el =>
                 <div key={el.value} className="sort-item" onClick={() => sortingSelection(el.value)}>
                     {el.name}
-                </div>
+                </div>,
             )}
         </div>
     );

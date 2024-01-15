@@ -10,11 +10,11 @@ export interface IRoute {
     element: ComponentType;
 }
 export enum RouteNames {
-    LOGIN = '/login',
-    MAIN = '/',
-    DENSITY = '/density',
-    REGISTRATION = '/registration',
-    DOCUMENTATION = '/documentation'
+    LOGIN = "/login",
+    MAIN = "/",
+    DENSITY = "/density",
+    REGISTRATION = "/registration",
+    DOCUMENTATION = "/documentation"
 }
 export const publicRouters: IRoute[] = [
     { path: RouteNames.MAIN, element: Home},

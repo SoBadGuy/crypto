@@ -11,12 +11,12 @@ interface IState {
 
 const initialState: IState = {
     pair: [],
-    activeTradingPair: '',
+    activeTradingPair: "",
     status: null,
-    errorMessage: ""
+    errorMessage: "", 
 }
 
-export const fetchTradingPairs = createAsyncThunk('fetchTradingPairs', async () => {
+export const fetchTradingPairs = createAsyncThunk("fetchTradingPairs", async () => {
     return await PostService.getSnapshotOfTradingPairs()
 })
 export const addTradingPairSlice = createSlice({
@@ -25,18 +25,18 @@ export const addTradingPairSlice = createSlice({
     reducers: {
         updateActiveTradingPair: (state, action) => {
             state.activeTradingPair = action.payload
-        }
+        },
     },
     extraReducers(builder)  {
         builder.addCase(fetchTradingPairs.fulfilled, (state, action) => {
             state.pair = [...action.payload].filter(pair => pair.symbol.slice(-4) === "USDT")
             state.activeTradingPair = [...state.pair][0].symbol
-            state.status = 'success'
+            state.status = "success"
         }).addCase(fetchTradingPairs.rejected, (state) => {
             state.status = "error"
             state.errorMessage = "Что-то пошло не так"
         })
-    }
+    },
 })
 
 export const {updateActiveTradingPair} = addTradingPairSlice.actions

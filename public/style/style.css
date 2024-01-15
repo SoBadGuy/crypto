@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,12 +9,28 @@
   font-family: "Montserrat", sans-serif;
 }
 
+#root {
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 body {
+  height: 100%;
   background-color: #c0c3be;
 }
 
 .wrapper {
-  height: 100vh;
+  padding: 5px;
+  height: 100%;
   display: flex;
   gap: 5px;
   flex-direction: column;
@@ -19,7 +39,6 @@ body {
 
 /************HEADER**************/
 .container {
-  width: 99.5vw;
   margin: 0 auto;
 }
 
@@ -94,6 +113,7 @@ body {
 .home {
   position: relative;
   flex-grow: 1;
+  height: 100%;
 }
 
 .home__open-tradingMenu {
@@ -142,6 +162,10 @@ body {
 .trading-menu__btn-market {
   width: 50%;
   height: 25px;
+  border: 2px solid black;
+  background-color: #f1fdff;
+  color: black;
+  font-size: 14px;
 }
 
 .trading-menu__btn-market_active {
@@ -293,6 +317,13 @@ body {
   margin-top: 10px;
   margin-right: 5px;
   width: 40px;
+  height: 20px;
+  background-color: #f1fdff;
+  border: 2px solid black;
+  color: black;
+  border-radius: 0;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .chart__btnInterval_active {
@@ -318,6 +349,16 @@ body {
     display: flex;
     width: 315px;
     z-index: 10;
+    height: 100%;
+    animation: openListPair 1s;
+  }
+  @keyframes openListPair {
+    from {
+      transform: translateX(-315px);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
   .trading-menu__title {
     position: relative;
@@ -325,14 +366,14 @@ body {
   .home__open-tradingMenu {
     display: block;
     position: absolute;
-    top: 80px;
-    left: 10px;
+    top: 100px;
+    left: 0;
     z-index: 5;
   }
   .trading-menu-mini__close {
     display: block;
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
   }
   .trade-list__item {
@@ -344,19 +385,37 @@ body {
   }
   .navbar__box {
     display: none;
+    animation: closeNavbarMenu 1s;
+  }
+  @keyframes closeNavbarMenu {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-300px);
+    }
   }
   .navbar__box_mini {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
     width: 310px;
     border: 1px solid black;
     z-index: 20;
     border-radius: 10px;
     background-color: white;
+    animation: openNavbarMenu 1s;
+  }
+  @keyframes openNavbarMenu {
+    from {
+      transform: translateY(-300px);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
   .navbar__list {
     display: flex;
@@ -369,6 +428,9 @@ body {
   }
   .navbar__item:not(:first-child) {
     margin-left: 0;
+  }
+  .header__box {
+    height: 40px;
   }
   .header__group-buttons {
     margin-top: 20px;
@@ -383,6 +445,9 @@ body {
   }
   .footer {
     display: none;
+  }
+  #chart {
+    height: 100%;
   }
 }
 

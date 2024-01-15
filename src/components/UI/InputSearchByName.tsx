@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent, FC} from "react";
 
 interface ISearch {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -8,7 +8,7 @@ const InputSearchByName: FC<ISearch> = ({onChange, value}) => {
     return (
         <input
             onChange={onChange}
-            value={value}
+            value={value} 
             className="search-by-name"
             type="text"
             placeholder="Поиск по имени...."

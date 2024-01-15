@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {useWebSocket} from "../hooks/useWebSocket";
 import {updateActiveTradingPair} from "../store/feauters/AddTradingPairSlice";
@@ -8,18 +8,31 @@ import {useSorting} from "../hooks/useSorting";
 interface IListPair {
     inputValue: string
     sortingType: {type: string, sortingMethod: string}
+    switchMenuTradingPair: () => void
 }
-const ListPairs:FC<IListPair> = ({inputValue, sortingType}) => {
+interface ITradingPairs {
+    symbol: string,
+    lastPrice: number,
+    priceChangePercent: number,
+    quoteVolume: number,
+    [key: string]: any
+}
+const ListPairs:FC<IListPair> = ({inputValue, sortingType, switchMenuTradingPair}) => {
     const dispatch = useAppDispatch()
     const snapshotTradingPairs = useAppSelector(state => state.tradingPairs.pair)
     const activeTradingPair = useAppSelector(state => state.tradingPairs.activeTradingPair)
     const getRequestStatus = useAppSelector(state => state.tradingPairs.status)
-    const [tradingPairs, setTradingPairs] = useState<any[]>([])
-    const [bookmark, setBookmark] = useState([''])
+    const [tradingPairs, setTradingPairs] = useState<ITradingPairs[]>([])
+    const [bookmark, setBookmark] = useState([""])
     const getSortingTradingPair = useSorting((allPair)=> setTradingPairs(allPair), tradingPairs, inputValue, sortingType)
     const pairs = getSortingTradingPair ?? tradingPairs
-    const pairConversion = (newData: any[], oldData: any[]) => {
-        return  oldData.map((el: any) => {
+
+    const switchMenu = (el: string) => {
+        dispatch(updateActiveTradingPair(el))
+        switchMenuTradingPair()
+    }
+    const pairConversion = (newData: ITradingPairs[], oldData: ITradingPairs[]) => {
+        return  oldData.map((el) => {
             for (let item of newData) {
                 if (el.symbol === item.s) {
                     const price = item.c.replace(/0*$/,"");
@@ -40,35 +53,35 @@ const ListPairs:FC<IListPair> = ({inputValue, sortingType}) => {
             return `${Math.round(volume/1000000000)}B`
         }
     }
-    const addBookMark = (e: any, elem: string) => {
-        e.stopPropagation()
+    const addBookMark = (event: React.MouseEvent<SVGElement, MouseEvent>, elem: string) => {
+        event.stopPropagation()
         setBookmark((e)  => [...e, elem])
     }
-    const deleteBookMark = (e: any, elem: string) => {
-        e.stopPropagation()
+    const deleteBookMark = (event: React.MouseEvent<SVGElement, MouseEvent>, elem: string) => {
+        event.stopPropagation()
         setBookmark((el) => el.filter(symbol => symbol !== elem))
     }
 
-    useWebSocket((data: any) => {
+    useWebSocket((data: ITradingPairs[]) => {
         setTradingPairs((prev) => pairConversion(data, prev))
-    }, `!ticker@arr`)
+    }, "!ticker@arr")
 
     useEffect(() => {
         setTradingPairs(snapshotTradingPairs)
     }, [snapshotTradingPairs]);
 
     useEffect(() => {
-        const getLocalStorage = JSON.parse(localStorage.getItem('bookmark')!)
+        const getLocalStorage = JSON.parse(localStorage.getItem("bookmark")!)
         if (getLocalStorage) {
             setBookmark(getLocalStorage)
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('bookmark', JSON.stringify(bookmark))
+        localStorage.setItem("bookmark", JSON.stringify(bookmark))
     }, [bookmark]);
     const response = () => {
-        if (getRequestStatus === 'error') {
+        if (getRequestStatus === "error") {
             return (
                 <div className="trade-list__loader">Возникла ошибка, перезагрузите страницу</div>
             )
@@ -79,31 +92,31 @@ const ListPairs:FC<IListPair> = ({inputValue, sortingType}) => {
                 <div className="trade-list__loader">Идет загрузка...</div>
             )
         }
-        if (getRequestStatus === 'success') {
+        if (getRequestStatus === "success") {
             if (pairs.length > 0) {
                 return (
                     <div className="trade-list__container">
-                        {pairs.map((el, index) =>
+                        {pairs.map((el) =>
                             <div
                                 key={el.symbol}
-                                className={activeTradingPair === el.symbol ? 'trade-list__box trade-list__box_active' : 'trade-list__box' }
-                                onClick={() => dispatch(updateActiveTradingPair(el.symbol))}
+                                className={activeTradingPair === el.symbol ? "trade-list__box trade-list__box_active" : "trade-list__box" }
+                                onClick={() => switchMenu(el.symbol)}
                             >
                                 <div
                                     className="trade-list__item"
                                 >{bookmark.indexOf(el.symbol) > 0
-                                    ? <FcBookmark onClick={(e) => deleteBookMark(e, el.symbol)}/>
-                                    : <GrBookmark onClick={(e) => addBookMark(e, el.symbol)}/>}
+                                        ? <FcBookmark onClick={(e) => deleteBookMark(e, el.symbol)}/>
+                                        : <GrBookmark onClick={(e) => addBookMark(e, el.symbol)}/>}
                                 </div>
                                 <div className="trade-list__item trade-list__name">{el.symbol}</div>
                                 <div className="trade-list__item trade-list__lastPrice">{el.lastPrice}</div>
                                 <div
-                                    className={el.priceChangePercent < 0 ? 'trade-list__item trade-list__priceChangePercent_min' :'trade-list__item trade-list__priceChangePercent'}
+                                    className={el.priceChangePercent < 0 ? "trade-list__item trade-list__priceChangePercent_min" :"trade-list__item trade-list__priceChangePercent"}
                                 >
                                     {Number(el.priceChangePercent).toFixed(2)}
                                 </div>
                                 <div className="trade-list__item trade-list__quoteVolume">{formattingVolume(el.quoteVolume)}</div>
-                            </div>
+                            </div>,
                         )}
                     </div>)}
             if (pairs.length === 0 && inputValue) {
@@ -114,9 +127,9 @@ const ListPairs:FC<IListPair> = ({inputValue, sortingType}) => {
         }
     }
     return (
-    <div className="trade-list">
+        <div className="trade-list">
             {response()}
-    </div>
+        </div>
     );
 };
 

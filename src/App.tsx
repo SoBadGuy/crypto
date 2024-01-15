@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect} from "react";
 import {useAppDispatch} from "./store/hooks";
 import {fetchTradingPairs} from "./store/feauters/AddTradingPairSlice";
 import Navbar from "./components/Navbar";
@@ -12,16 +12,16 @@ const App: FC = () => {
         dispatch(fetchTradingPairs())
     }, []);
 
-  return (
-    <div className="App">
-        <div className='wrapper'>
-            <BrowserRouter>
-                <Navbar/>
-                <AppRouter/>
-            </BrowserRouter>
+    return (
+        <div className="App"> 
+            <div className="wrapper">
+                <BrowserRouter>
+                    <Navbar/>
+                    <AppRouter/>
+                </BrowserRouter>
+            </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default App;
